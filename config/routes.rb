@@ -1,4 +1,31 @@
 GroupsyDaisy::Application.routes.draw do
+  resources :line_items
+
+
+  resources :items
+
+
+  resources :participants
+
+
+  resources :trips
+
+
+  resources :groups
+
+
+  resources :people
+
+
+  resources :destination_specific_activities
+
+
+  resources :activities
+
+
+  resources :destinations
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

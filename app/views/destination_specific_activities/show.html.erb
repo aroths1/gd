@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Activity:</b>
+  <%= @destination_specific_activity.activity %>
+</p>
+
+<p>
+  <b>Destination:</b>
+  <%= @destination_specific_activity.destination %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @destination_specific_activity.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @destination_specific_activity.end_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_destination_specific_activity_path(@destination_specific_activity) %> |
+<%= link_to 'Back', destination_specific_activities_path %>

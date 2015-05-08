@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  person: 
+  lead_participant: 1
+  trip: 
+
+two:
+  person: 
+  lead_participant: 1
+  trip: 

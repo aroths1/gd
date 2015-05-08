@@ -1,0 +1,29 @@
+<h1>Listing destination_specific_activities</h1>
+
+<table>
+  <tr>
+    <th>Activity</th>
+    <th>Destination</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @destination_specific_activities.each do |destination_specific_activity| %>
+  <tr>
+    <td><%= destination_specific_activity.activity %></td>
+    <td><%= destination_specific_activity.destination %></td>
+    <td><%= destination_specific_activity.start_date %></td>
+    <td><%= destination_specific_activity.end_date %></td>
+    <td><%= link_to 'Show', destination_specific_activity %></td>
+    <td><%= link_to 'Edit', edit_destination_specific_activity_path(destination_specific_activity) %></td>
+    <td><%= link_to 'Destroy', destination_specific_activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Destination specific activity', new_destination_specific_activity_path %>

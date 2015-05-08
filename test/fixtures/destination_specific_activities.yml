@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  activity: 
+  destination: 
+  start_date: 2015-05-08
+  end_date: 2015-05-08
+
+two:
+  activity: 
+  destination: 
+  start_date: 2015-05-08
+  end_date: 2015-05-08

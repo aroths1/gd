@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  group: 
+  destination_specific_activity: 
+  date: 2015-05-08
+  leader: 1
+
+two:
+  group: 
+  destination_specific_activity: 
+  date: 2015-05-08
+  leader: 1
