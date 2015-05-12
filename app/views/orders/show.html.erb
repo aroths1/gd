@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>References:</b>
+  <%= @order.references %>
+</p>
+
+<p>
+  <b>Participant:</b>
+  <%= @order.participant %>
+</p>
+
+<p>
+  <b>Paid:</b>
+  <%= @order.paid %>
+</p>
+
+<p>
+  <b>Boolean:</b>
+  <%= @order.boolean %>
+</p>
+
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150508202421) do
+ActiveRecord::Schema.define(:version => 20150512195910) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -55,15 +55,21 @@ ActiveRecord::Schema.define(:version => 20150508202421) do
   add_index "items", ["destination_specific_activity_id"], :name => "index_items_on_destination_specific_activity_id"
 
   create_table "line_items", :force => true do |t|
-    t.integer  "participant_id"
     t.integer  "item_id"
     t.integer  "quantity"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "order_id"
   end
 
   add_index "line_items", ["item_id"], :name => "index_line_items_on_item_id"
-  add_index "line_items", ["participant_id"], :name => "index_line_items_on_participant_id"
+
+  create_table "orders", :force => true do |t|
+    t.boolean  "paid"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "participant_id"
+  end
 
   create_table "participants", :force => true do |t|
     t.integer  "person_id"

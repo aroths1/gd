@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  references: MyString
+  participant: MyString
+  paid: MyString
+  boolean: MyString
+
+two:
+  references: MyString
+  participant: MyString
+  paid: MyString
+  boolean: MyString

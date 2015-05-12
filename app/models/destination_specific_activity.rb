@@ -4,4 +4,8 @@ class DestinationSpecificActivity < ActiveRecord::Base
   has_many :trips
   has_many :items
   attr_accessible :end_date, :start_date, :activity, :destination
+  
+  def to_s
+    self.activity.name #+ ': ' + self.start_date.to_s + ' - ' + self.end_date.to_s
+  end
 end

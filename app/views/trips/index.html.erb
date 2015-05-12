@@ -3,7 +3,8 @@
 <table>
   <tr>
     <th>Group</th>
-    <th>Destination specific activity</th>
+    <th>Destination</th>
+    <th>Activity</th>
     <th>Date</th>
     <th>Leader</th>
     <th></th>
@@ -14,7 +15,8 @@
 <% @trips.each do |trip| %>
   <tr>
     <td><%= trip.group %></td>
-    <td><%= trip.destination_specific_activity %></td>
+    <td><%= trip.destination_specific_activity.destination.name %></td>
+    <td><%= trip.destination_specific_activity.activity.name %></td>
     <td><%= trip.date %></td>
     <td><%= trip.leader %></td>
     <td><%= link_to 'Show', trip %></td>
