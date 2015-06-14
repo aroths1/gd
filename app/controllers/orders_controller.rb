@@ -24,6 +24,8 @@ class OrdersController < ApplicationController
   # GET /orders/new
   # GET /orders/new.json
   def new
+    @trip = Trip.find(params[:id])
+    @items = Item.find_all_by_destination_specific_activity_id(@trip.destination_specific_activity.id)
     @order = Order.new
 
     respond_to do |format|
