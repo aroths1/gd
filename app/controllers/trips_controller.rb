@@ -1,6 +1,7 @@
 class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
+  skip_before_filter :authenticate_user!, :only => [:show]
   def index
     @trips = Trip.all
 

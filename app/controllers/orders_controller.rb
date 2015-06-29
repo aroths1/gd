@@ -27,6 +27,9 @@ class OrdersController < ApplicationController
     @trip = Trip.find(params[:id])
     @items = Item.find_all_by_destination_specific_activity_id(@trip.destination_specific_activity.id)
     @order = Order.new
+    @order.build_participant
+    @order.line_items.build
+    @order.participant.build_person
 
     respond_to do |format|
       format.html # new.html.erb

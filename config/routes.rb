@@ -1,4 +1,11 @@
 GroupsyDaisy::Application.routes.draw do
+  
+  root to: "static#index"
+
+  devise_for :users
+  
+  get "static/index"
+
   match 'orders/:id/new' => 'orders#new', :as => :new_order
   
   resources :orders
