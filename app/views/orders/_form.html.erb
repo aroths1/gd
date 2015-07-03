@@ -10,29 +10,12 @@
       </ul>
     </div>
   <% end %>
-	<%= f.fields_for :participant do |builder| %>
-	<div class="field">
-		<%= builder.hidden_field :trip_id, :value => @trip.id %>
-	</div>
-		<%= f.fields_for :person do |builder| %>
-		<div class="field">
-			<%= builder.label "First name" %>
-			<%= builder.text_field :first_name %>
-		</div>
-		<div class="field">
-			<%= builder.label "Last name" %>
-			<%= builder.text_field :last_name %>
-		</div>
-		<div class="field">
-			<%= builder.label "Email:" %>
-			<%= current_user.email %>
-		</div>
-		<div class="field">
-			<%= builder.label "Mobile phone" %>
-			<%= builder.text_field :mobile_phone %>
-		</div>
-		<% end %>
-	<% end %>
+  <div class="field">
+  	<%= f.hidden_field :trip_id, :value => @trip.id %>
+  </div>
+  <div class="field">
+  	<%= f.hidden_field :user_id, :value => current_user.id %>
+  </div>
 	
 		<%= f.fields_for :line_items do |builder| %>
 			<% @items.each do |item| %>

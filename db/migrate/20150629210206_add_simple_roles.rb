@@ -1,6 +1,6 @@
 class AddSimpleRoles < ActiveRecord::Migration
   def up
-    drop_table :roles
+    #drop_table :roles
     add_column :users, :role, :string
   end
 

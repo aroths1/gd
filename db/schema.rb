@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150703002333) do
+ActiveRecord::Schema.define(:version => 20150703204133) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -65,10 +65,11 @@ ActiveRecord::Schema.define(:version => 20150703002333) do
   add_index "line_items", ["item_id"], :name => "index_line_items_on_item_id"
 
   create_table "orders", :force => true do |t|
+    t.integer  "user_id"
     t.boolean  "paid"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "users_id"
+    t.integer  "trip_id"
   end
 
   create_table "trips", :force => true do |t|
@@ -84,7 +85,6 @@ ActiveRecord::Schema.define(:version => 20150703002333) do
   add_index "trips", ["group_id"], :name => "index_trips_on_group_id"
 
   create_table "users", :force => true do |t|
-    t.integer  "person_id"
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
