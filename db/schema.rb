@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150628215134) do
+ActiveRecord::Schema.define(:version => 20150703002333) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -66,29 +66,9 @@ ActiveRecord::Schema.define(:version => 20150628215134) do
 
   create_table "orders", :force => true do |t|
     t.boolean  "paid"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "participant_id"
-  end
-
-  create_table "participants", :force => true do |t|
-    t.integer  "person_id"
-    t.integer  "lead_participant"
-    t.integer  "trip_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  add_index "participants", ["person_id"], :name => "index_participants_on_person_id"
-  add_index "participants", ["trip_id"], :name => "index_participants_on_trip_id"
-
-  create_table "people", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "mobile_phone"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.date     "dob"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "users_id"
   end
 
   create_table "trips", :force => true do |t|
@@ -117,6 +97,10 @@ ActiveRecord::Schema.define(:version => 20150628215134) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "role"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "mobile_phone"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

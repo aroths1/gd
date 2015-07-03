@@ -17,16 +17,10 @@ GroupsyDaisy::Application.routes.draw do
   resources :items
 
 
-  resources :participants
-
-
   resources :trips
 
 
   resources :groups
-
-
-  resources :people
 
 
   resources :destination_specific_activities

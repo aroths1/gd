@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  ROLES = %w[admin group_leader lead_participant participant]
   belongs_to :person
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
