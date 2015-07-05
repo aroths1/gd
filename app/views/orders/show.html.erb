@@ -1,23 +1,31 @@
 
 
 <p>
-  <b>References:</b>
-  <%= @order.references %>
+	<%= @order.user %>
 </p>
-
 <p>
-  <b>Participant:</b>
-  <%= @order.participant %>
+	<%= @order.trip %>
 </p>
-
 <p>
-  <b>Paid:</b>
-  <%= @order.paid %>
+	<table>
+		<tr>
+			<th>Item</th>
+			<th>Quantity</th>
+			<th>Item Price</th>
+			<th>Extended Price</th>
+		</tr>
+		<% @order.line_items.each do |line_item| %>
+			<tr>
+				<td><%= line_item.item.name %></td>
+				<td><%= line_item.quantity %></td>
+				<td><%= number_to_currency(line_item.item.price) %></td>
+				<td><%= number_to_currency(line_item.extended_price) %></td>
+			</tr>
+		<% end %>
+	</table>
 </p>
-
 <p>
-  <b>Boolean:</b>
-  <%= @order.boolean %>
+	Total amout due: <%= number_to_currency(@order.total_amount_due) %>
 </p>
 
 

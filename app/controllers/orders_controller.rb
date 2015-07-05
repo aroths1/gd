@@ -27,9 +27,7 @@ class OrdersController < ApplicationController
     @trip = Trip.find(params[:id])
     @items = Item.find_all_by_destination_specific_activity_id(@trip.destination_specific_activity.id)
     @order = Order.new
-    #@order.build_participant
     @order.line_items.build
-    #@order.participant.build_person
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,6 +44,8 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(params[:order])
+    #Avoids saving line items that don't specify a quantity. A cleaner way to implement this probably exists.
+    @order.line_items.delete_if {|line_item| line_item.quantity.blank? || line_item.quantity == 0 }
 
     respond_to do |format|
       if @order.save

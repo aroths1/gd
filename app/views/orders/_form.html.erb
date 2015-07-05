@@ -10,21 +10,19 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
+
   	<%= f.hidden_field :trip_id, :value => @trip.id %>
-  </div>
-  <div class="field">
   	<%= f.hidden_field :user_id, :value => current_user.id %>
-  </div>
-	
+	<% @items.each do |item| %>	
 		<%= f.fields_for :line_items do |builder| %>
-			<% @items.each do |item| %>
-				<div class="field">
+			<div class="field">
+				<%= builder.hidden_field :item_id, :value => item.id %>
 				<%= builder.label item.name %>
 				<%= builder.text_field :quantity, size: 2 %>
-				</div>
-			<% end %>	
-		<% end %>
+				<%= ' @ ' + number_to_currency(item.price) + ' each'%>
+			</div>
+		<% end %>	
+	<% end %>
 	
 
   <div class="actions">
