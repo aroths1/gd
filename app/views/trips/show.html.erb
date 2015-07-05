@@ -1,5 +1,5 @@
 
-<h2>Trip Information</h2>
+<h2>Trip Information for Participants</h2>
 <p>
   <b>Group:</b>
   <%= @trip.group %>
@@ -32,9 +32,46 @@
 	<% end %>
 </ul>
 <p>
-	
-
-
+<% if current_user.is_trip_leader?(@trip) %>
+<h2>Trip Information for Leader</h2>
+<p>
+	<table>
+		<tr>
+			<th>
+				Name
+			</th>
+			<% @trip.destination_specific_activity.items.each do |item| %>
+				<th>
+					<%= item.name.capitalize.pluralize %>
+				</th>
+				
+			<% end %>	
+				<th>
+					Amount due
+				</th>
+		</tr>		
+				<% @trip.orders.each do |order| %>
+					<tr>
+						<td><%= order.user %></td>
+						<% @trip.destination_specific_activity.items.each do |item| %>
+							<td>
+								<% order.line_items.each do |line_item| %>
+									<%= line_item.quantity if line_item.item_id == item.id %>
+								<% end %>
+							</td>
+						<% end %>
+						<td>
+							<%= number_to_currency(order.total_amount_due) %>
+						</td>
+					</tr>
+				<% end %>
+		
+	</table>
+</p>
+<p>
+	Grand total: <%= number_to_currency(@trip.total_amount_due) %>
+</p>
+<% end %>
 <%= link_to 'Click here to sign up.', new_order_path(@trip.id) %>
 <%# I created a custom named route to be able to include the trip_id in the url. This is not OOB functionality. %>
 </p>

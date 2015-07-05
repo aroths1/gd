@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
   def to_s
     self.first_name + ' ' + self.last_name
   end
+  
+  def is_trip_leader?(trip)
+    self.id == trip.leader.id
+  end
 end
