@@ -1,7 +1,7 @@
 class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
-  skip_before_filter :authenticate_user!, :only => [:show]
+  skip_before_filter :authenticate_user!, :only => [:public_show]
   def index
     @trips = Trip.all
 
@@ -17,7 +17,16 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html #{render layout: 'trip'}# show.html.erb
+      format.json { render json: @trip }
+    end
+  end
+  
+  def public_show
+    @trip = Trip.find(params[:id])
+
+    respond_to do |format|
+      format.html #{render layout: 'trip'}# show.html.erb
       format.json { render json: @trip }
     end
   end

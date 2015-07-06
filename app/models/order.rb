@@ -11,4 +11,10 @@ class Order < ActiveRecord::Base
     self.line_items.each {|line_item| sum += line_item.extended_price}
     sum
   end
+  
+  def item_count(item)
+    sum = 0
+    self.line_items.each {|line_item| sum += line_item.quantity if line_item.item_id == item.id}
+    sum
+  end
 end

@@ -1,0 +1,45 @@
+<h2>Trip Information for Leader</h2>
+<p>
+	<table>
+		<tr>
+			<th>
+				Name
+			</th>
+			<% @trip.destination_specific_activity.items.each do |item| %>
+				<th>
+					<%= item.name.capitalize.pluralize %>
+				</th>
+				
+			<% end %>	
+				<th>
+					Amount due
+				</th>
+		</tr>		
+				<% @trip.orders.each do |order| %>
+					<tr>
+						<td><%= order.user %></td>
+						<% @trip.destination_specific_activity.items.each do |item| %>
+							<td>
+								<% order.line_items.each do |line_item| %>
+									<%= line_item.quantity if line_item.item_id == item.id %>
+								<% end %>
+							</td>
+						<% end %>
+						<td>
+							<%= number_to_currency(order.total_amount_due) %>
+						</td>
+					</tr>
+				<% end %>
+		<tr>
+			<td>TOTALS</td>
+			<% @trip.destination_specific_activity.items.each do |item| %>
+				<td>
+					<strong><%= @trip.item_count(item)%></strong>
+				</td>
+			<% end %>
+			<td>
+				<strong><%= number_to_currency(@trip.total_amount_due) %></strong>
+			</td>
+		</tr>
+	</table>
+</p>

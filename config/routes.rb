@@ -1,12 +1,14 @@
 GroupsyDaisy::Application.routes.draw do
   
-  root to: "static#index"
-
+  #root to: "static#index"
+  root to: "trips#index"
+  
   devise_for :users
   
   get "static/index"
 
   match 'orders/:id/new' => 'orders#new', :as => :new_order
+  match 'trips/public/:id' => 'trips#public_show', as: :public_trip #use public_trip_url(trip_id)
   
   resources :orders
 

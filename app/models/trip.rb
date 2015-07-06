@@ -2,7 +2,7 @@ class Trip < ActiveRecord::Base
   belongs_to :group
   belongs_to :destination_specific_activity
   belongs_to :leader, class_name: 'User', foreign_key: :leader
-  has_many :orders
+  has_many :orders, dependent: :destroy
   attr_accessible :date, :leader, :group, :destination_specific_activity
   
   def to_s
@@ -13,5 +13,20 @@ class Trip < ActiveRecord::Base
     sum = 0
     self.orders.each {|order| sum += order.total_amount_due}
     sum
+  end
+  
+  def item_count(item)
+    sum = 0
+    self.orders.each {|order| sum += order.item_count(item)}
+    sum
+  end
+  
+  def user_registered?(user)
+    result = Order.where("user_id = :user_id and trip_id = :trip_id", {user_id: user.id, trip_id: self.id})
+    if result.empty?
+      return false
+    else
+      return true
+    end
   end
 end
