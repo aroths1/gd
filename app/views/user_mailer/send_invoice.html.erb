@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  	<p>
+		<%= render "orders/invoice_table" %>
+	</p>
+	<p>Total amout due: <%= number_to_currency(@order.total_amount_due) %></p>
+  </body>
+</html>

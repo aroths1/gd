@@ -1,0 +1,5 @@
+<% @order.line_items.each do |line_item| %>
+	<%= line_item.item.name %>: <%= line_item.quantity %> x <%= number_to_currency(line_item.item.price) %> = <%= number_to_currency(line_item.extended_price) %>
+</<% end %>
+
+Total amout due: <%= number_to_currency(@order.total_amount_due) %>
