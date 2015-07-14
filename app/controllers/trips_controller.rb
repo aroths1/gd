@@ -90,4 +90,14 @@ class TripsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def email_publicize_new
+    @trip = Trip.find(params[:id])
+  end
+  
+  def email_publicize_create
+    @trip = Trip.find(params[:id]) #figure this out in form for the email
+    UserMailer.publicize_trip(params[:addresses], @trip, params[:message]).deliver
+    redirect_to trip_url(@trip)
+  end
 end

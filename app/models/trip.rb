@@ -29,4 +29,18 @@ class Trip < ActiveRecord::Base
       return true
     end
   end
+  
+  def activity
+    self.destination_specific_activity.activity.name
+  end
+  
+  def destination
+    self.destination_specific_activity.destination
+  end
+  
+  def publicize_text
+    text = "On #{self.date} #{self.group} is planning a trip to go #{self.activity} at #{self.destination}."
+    text += " #{self.leader} will be leading the trip. "
+    #text += "Get details and sign up online at #{Rails.application.routes.url_helpers.public_trip_url(self.id, host: 'groupsydaisy.com')}."
+  end
 end
