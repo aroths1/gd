@@ -1,6 +1,7 @@
 class DestinationSpecificActivitiesController < ApplicationController
   # GET /destination_specific_activities
   # GET /destination_specific_activities.json
+  load_and_authorize_resource #cancancan
   def index
     @destination_specific_activities = DestinationSpecificActivity.all
 

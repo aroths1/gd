@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
+  load_and_authorize_resource #cancancan
   def index
     @orders = Order.all
 

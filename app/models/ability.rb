@@ -2,6 +2,18 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    user ||= User.new #guest user (not logged in)
+    if user.admin?
+      can :manage, :all
+    else #role is anything but admin or role is nil
+      can :manage, Order, :user_id => user.id
+      can :manage, LineItem, :order => { :user_id => user.id }
+      can :show, Trip
+      #Allows trip leader to...
+      can :manage, Trip, :leader => { :id => user.id } #...manage trips where he is the leader.
+      can :manage, Order, :trip => { :leader => { :id => user.id } }#...manage orders for trip wher he is leader.
+      can :manage, LineItem, :order => { :trip => { :leader => { :id => user.id } } }#...manage line items...
+    end
     # Define abilities for the passed in user here. For example:
     #
     #

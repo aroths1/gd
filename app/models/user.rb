@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  ROLES = %w[admin group_leader lead_participant participant]
+  ROLES = %w[admin user]
   belongs_to :person
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -16,5 +16,9 @@ class User < ActiveRecord::Base
   
   def is_trip_leader?(trip)
     self.id == trip.leader.id
+  end
+  
+  def admin?
+    self.role == 'admin'
   end
 end

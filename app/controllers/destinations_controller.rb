@@ -1,6 +1,7 @@
 class DestinationsController < ApplicationController
   # GET /destinations
   # GET /destinations.json
+  load_and_authorize_resource #cancancan
   def index
     @destinations = Destination.all
 

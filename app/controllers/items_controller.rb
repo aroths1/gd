@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
+  load_and_authorize_resource #cancancan
   def index
     @items = Item.all
 

@@ -2,6 +2,8 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   skip_before_filter :authenticate_user!, :only => [:public_show]
+  load_and_authorize_resource #cancancan
+  skip_authorization_check :only => [:public_show]
   def index
     @trips = Trip.all
 

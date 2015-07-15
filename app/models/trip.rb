@@ -30,6 +30,10 @@ class Trip < ActiveRecord::Base
     end
   end
   
+  def is_leader?(user)
+    self.leader.id == user.id
+  end
+  
   def activity
     self.destination_specific_activity.activity.name
   end

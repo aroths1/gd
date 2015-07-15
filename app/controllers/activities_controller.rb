@@ -1,6 +1,7 @@
 class ActivitiesController < ApplicationController
   # GET /activities
   # GET /activities.json
+  load_and_authorize_resource #cancancan
   def index
     @activities = Activity.all
 
