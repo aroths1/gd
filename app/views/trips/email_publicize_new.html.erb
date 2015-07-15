@@ -1,8 +1,10 @@
+<h2>Publicize trip via email</h2>
 <%= form_tag(email_publicize_create_path(@trip.id)) %>
 	<div class="field">
 		<%= label_tag :message %>
 		<%= text_area_tag :message, @trip.publicize_text, rows: 10, cols: 100 %>
 	</div>
+	<b>A link to the trip's public page is automatically included in the email.</b>
 	<div class="field">
 		<%= label_tag :email_addresses_separated_by_commas %>
 		<%= text_area_tag :addresses, nil, rows: 10, cols: 100 %>
