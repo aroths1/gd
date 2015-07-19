@@ -6,4 +6,16 @@ class LineItem < ActiveRecord::Base
   def extended_price
     quantity * item.price
   end
+  
+  def price
+    self.item.price
+  end
+  
+  def name
+    self.item.name
+  end
+  
+  def ==(x)
+    self.item_id == x.id
+  end
 end

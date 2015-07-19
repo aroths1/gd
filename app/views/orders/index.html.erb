@@ -2,18 +2,18 @@
 
 <table>
   <tr>
-    <th>Participant</th>
+    <th>Trip</th>
+    <th>User</th>
     <th>Paid</th>
-    <th></th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
 <% @orders.each do |order| %>
-  <tr>    <td><%= order.references %></td>
-    <td><%= order.participant %></td>
-    <td><%= order.paid %></td>    <td><%= order.boolean %></td>
+  <tr>    <td><%= order.trip %></td>
+    <td><%= order.user %></td>
+    <td><%= order.paid %></td>
     <td><%= link_to 'Show', order %></td>
     <td><%= link_to 'Edit', edit_order_path(order) %></td>
     <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -22,5 +22,3 @@
 </table>
 
 <br />
-
-<%= link_to 'New Order', new_order_path %>
