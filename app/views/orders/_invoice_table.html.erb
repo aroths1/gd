@@ -5,7 +5,7 @@
 			<th>Item Price</th>
 			<th>Extended Price</th>
 		</tr>
-		<% @order.line_items.each do |line_item| %>
+		<% @order.line_items.sort!.each do |line_item| %>
 			<tr>
 				<td><%= line_item.item.name %></td>
 				<td><%= line_item.quantity %></td>

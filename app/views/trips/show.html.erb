@@ -41,7 +41,7 @@
 <%# I created a custom named route to be able to include the trip_id in the url. This is not OOB functionality. %>
 
 <% else %>
-	<%= "Contact your trip leader to make changes to your order." %>
+	<%= link_to 'Click here to modify your registration for this trip.', edit_order_path(@order.id) %>
 <% end %>
 </p>
 <%= link_to 'Edit', edit_trip_path(@trip) %> |

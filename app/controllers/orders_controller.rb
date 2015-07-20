@@ -39,8 +39,7 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
-    @trip = @order.trip
-    items = Item.find_all_by_destination_specific_activity_id(@trip.destination_specific_activity.id)
+    items = Item.find_all_by_destination_specific_activity_id(@order.trip.destination_specific_activity.id)
     #@order.line_items.build
     @line_items = Array.new
     items.each_index do |i|

@@ -18,4 +18,8 @@ class LineItem < ActiveRecord::Base
   def ==(x)
     self.item_id == x.id
   end
+  
+  def <=>(x)
+    self.item_id <=> x.item_id
+  end
 end

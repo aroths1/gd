@@ -17,7 +17,7 @@ class TripsController < ApplicationController
   # GET /trips/1.json
   def show
     @trip = Trip.find(params[:id])
-
+    @order = Order.find_by_trip_id_and_user_id(@trip.id, current_user.id)
     respond_to do |format|
       format.html #{render layout: 'trip'}# show.html.erb
       format.json { render json: @trip }
