@@ -2,7 +2,7 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   skip_before_filter :authenticate_user!, :only => [:public_show]
-  load_and_authorize_resource #cancancan
+  load_and_authorize_resource except: :public_show #cancancan
   skip_authorization_check :only => [:public_show]
   def index
     @trips = Trip.all
@@ -26,7 +26,9 @@ class TripsController < ApplicationController
   
   def public_show
     @trip = Trip.find(params[:id])
-
+    if current_user
+      @order = Order.find_by_user_id_and_trip_id(current_user.id, @trip.id)
+    end
     respond_to do |format|
       format.html #{render layout: 'trip'}# show.html.erb
       format.json { render json: @trip }

@@ -1,5 +1,3 @@
-
-<h2>Trip Information for Participants</h2>
 <p>
   <b>Group:</b>
   <%= @trip.group %>
@@ -36,13 +34,5 @@
 <% if ! current_user.nil? && current_user.is_trip_leader?(@trip) %>
 	<%= render partial: 'leader'%>
 <% end %>
-<% if (! current_user.nil? && ! @trip.user_registered?(current_user)) || ! user_signed_in? %>
-<%= link_to 'Click here to register for this trip.', new_order_path(@trip.id) %>
-<%# I created a custom named route to be able to include the trip_id in the url. This is not OOB functionality. %>
-
-<% else %>
-	<%= link_to 'Click here to modify your registration for this trip.', edit_order_path(@order.id) %>
-<% end %>
 </p>
-<%= link_to 'Edit', edit_trip_path(@trip) %> |
-<%= link_to 'Back', trips_path %>
+<%= render partial: 'show_footer_nav'%>

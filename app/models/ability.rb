@@ -6,7 +6,7 @@ class Ability
     if user.admin?
       can :manage, :all
     else #role is anything but admin or role is nil
-      can :manage, Order, :user_id => user.id
+      can [:show, :new, :edit, :create, :update], Order, :user_id => user.id
       can :manage, LineItem, :order => { :user_id => user.id }
       can :show, Trip
       #Allows trip leader to...

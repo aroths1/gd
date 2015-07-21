@@ -26,13 +26,18 @@ class OrdersController < ApplicationController
   # GET /orders/new.json
   def new
     @trip = Trip.find(params[:id])
-    @items = Item.find_all_by_destination_specific_activity_id(@trip.destination_specific_activity.id)
-    @order = Order.new
-    @order.line_items.build
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @order }
+    if ! @trip.user_registered?(current_user)
+      @items = Item.find_all_by_destination_specific_activity_id(@trip.destination_specific_activity.id)
+      @order = Order.new
+      @order.line_items.build
+  
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @order }
+      end
+    else
+      @order = Order.find_by_user_id_and_trip_id(current_user.id, @trip.id)
+      redirect_to action: :edit, :id => @order.id  #need to update params here to reflect the order ID or address in edit action
     end
   end
 

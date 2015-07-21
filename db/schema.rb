@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150703204133) do
+ActiveRecord::Schema.define(:version => 20150720204858) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20150703204133) do
     t.integer  "leader"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+    t.text     "payment_instructions"
   end
 
   add_index "trips", ["destination_specific_activity_id"], :name => "index_trips_on_destination_specific_activity_id"

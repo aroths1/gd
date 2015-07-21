@@ -3,7 +3,7 @@ class Trip < ActiveRecord::Base
   belongs_to :destination_specific_activity
   belongs_to :leader, class_name: 'User', foreign_key: :leader
   has_many :orders, dependent: :destroy
-  attr_accessible :date, :leader, :group, :destination_specific_activity
+  attr_accessible :date, :leader, :group, :destination_specific_activity, :payment_instructions
   
   def to_s
     self.destination_specific_activity.activity.to_s.capitalize + ' with ' + self.group.to_s + ' on ' + self.date.to_s

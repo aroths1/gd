@@ -77,9 +77,7 @@ class LineItemsController < ApplicationController
       end
     end #each
     redirect_to Order.find(params[:order_id]), notice: 'Order was succesfully updated.'
-    
-
-    
+ 
   end #update
 
   # DELETE /line_items/1
