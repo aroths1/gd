@@ -1,13 +1,10 @@
-<h1>Listing orders</h1>
+<h1>Trips you've registered for</h1>
 
 <table>
   <tr>
     <th>Trip</th>
     <th>User</th>
     <th>Paid</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @orders.each do |order| %>
@@ -16,7 +13,7 @@
     <td><%= order.paid %></td>
     <td><%= link_to 'Show', order %></td>
     <td><%= link_to 'Edit', edit_order_path(order) %></td>
-    <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%#= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

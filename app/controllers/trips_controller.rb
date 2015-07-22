@@ -102,6 +102,7 @@ class TripsController < ApplicationController
   def email_publicize_create
     @trip = Trip.find(params[:id])
     @addresses = params[:addresses].split(",").map(&:strip)
+    @addresses.each{|address| Contact.create( {email: address, trip_id: @trip.id})}
     UserMailer.send_publicize_trip(@addresses, @trip, params[:message])
     redirect_to trip_url(@trip)
   end

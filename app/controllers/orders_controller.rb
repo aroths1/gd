@@ -3,8 +3,7 @@ class OrdersController < ApplicationController
   # GET /orders.json
   load_and_authorize_resource #cancancan
   def index
-    @orders = Order.all
-
+    @orders = Order.joins(:user).where( user_id: current_user)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @orders }
