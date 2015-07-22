@@ -1,10 +1,12 @@
 class UserMailer < ActionMailer::Base
   default from: "admin@groupsydaisy.com"
   
-  def send_invoice(user, order)
+  def send_invoice(user, order, updated_order)
     @user = user
     @order = order
-    mail(to: @user.email, from: @order.trip.leader.email, subject: "Invoice for your #{@order.trip.date} trip")
+    subject = "Invoice for your #{@order.trip.date} trip"
+    subject << ", UPDATED" if updated_order
+    mail(to: @user.email, from: @order.trip.leader.email, subject: subject)
   end
   
   def send_publicize_trip(addresses, trip, message)
