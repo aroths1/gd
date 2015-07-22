@@ -13,6 +13,17 @@ class UserMailer < ActionMailer::Base
     addresses.each { |a| UserMailer.publicize_trip(a, @trip, @message).deliver}
   end
   
+  def send_email_participants(trip, addresses, subject, message)
+    @trip = trip
+    addresses.each{|a| UserMailer.email_participant(@trip, a, subject, message).deliver}
+  end
+  
+  def email_participant(trip, address, subject, message)
+    @trip = trip
+    @message = message
+    mail(to: address, from: trip.leader.email, subject: subject)
+  end
+  
   def publicize_trip(address, trip, message)
     @address = address
     #Add code here to save trip-associated email addresses if desired.

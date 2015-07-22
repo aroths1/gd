@@ -46,3 +46,6 @@
 <p>
 	<%= link_to 'Publicize trip via email', email_publicize_path(@trip.id) %>
 </p>
+<p>	
+	<%= link_to 'Send email to registered trip participants', email_participants_path(@trip.id) %>
+</p>

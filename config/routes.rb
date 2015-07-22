@@ -11,6 +11,8 @@ GroupsyDaisy::Application.routes.draw do
   match 'trips/public/:id' => 'trips#public_show', as: :public_trip #use public_trip_url(trip_id)
   match 'trips/email_publicize_new/:id' => 'trips#email_publicize_new', as: :email_publicize #email_publicize_path(trip_id)
   match 'trips/email_publicize_create/:id' => 'trips#email_publicize_create', as: :email_publicize_create
+  match 'trips/email_participants_new/:id' => 'trips#email_participants_new', as: :email_participants
+  match 'trips/email_participants_create/:id' => 'trips#email_participants_create', as: :email_participants_create
   put 'line_items' => 'line_items#update', as: :update_line_items
   
   resources :orders

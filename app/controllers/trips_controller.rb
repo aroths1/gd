@@ -99,6 +99,16 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
   end
   
+  def email_participants_new
+    @trip = Trip.find(params[:id])
+  end
+  
+  def email_participants_create
+    @trip = Trip.find(params[:id])
+    @addresses = @trip.orders.map{|order| order.user.email}
+    UserMailer.send_email_participants(@trip, @addresses, params[:subject], params[:message])
+    redirect_to trip_url(@trip)
+  end
   def email_publicize_create
     @trip = Trip.find(params[:id])
     @addresses = params[:addresses].split(",").map(&:strip)

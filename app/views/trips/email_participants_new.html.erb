@@ -1,0 +1,15 @@
+<h2>Send an email to registered trip participants</h2>
+<%= form_tag(email_participants_create_path(@trip.id)) %>
+	<div class="field">
+		<%= label_tag :subject %>
+		<%= text_field_tag :subject, nil, size: 100 %>
+	</div>
+	<div class="field">
+		<%= label_tag :message %>
+		<%= text_area_tag :message, nil, rows: 10, cols: 100 %>
+	</div>
+
+	<div class="actions">
+		<%= submit_tag 'Submit'%>
+	</div>
+</form>
