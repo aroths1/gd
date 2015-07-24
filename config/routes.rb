@@ -14,6 +14,7 @@ GroupsyDaisy::Application.routes.draw do
   match 'trips/email_participants_new/:id' => 'trips#email_participants_new', as: :email_participants
   match 'trips/email_participants_create/:id' => 'trips#email_participants_create', as: :email_participants_create
   put 'line_items' => 'line_items#update', as: :update_line_items
+  put 'orders' => 'orders#update_multiple', as: :update_orders
   
   resources :orders
 

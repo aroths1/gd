@@ -1,4 +1,5 @@
 <h2>Trip Information for Leader</h2>
+<%= form_tag '/orders', method: :put %>
 <p>
 	<table>
 		<tr>
@@ -14,7 +15,11 @@
 				<th>
 					Amount due
 				</th>
+				<th>
+					Paid?
+				</th>
 		</tr>		
+				<%= hidden_field_tag :trip_id, @trip.id %>
 				<% @trip.orders.each do |order| %>
 					<tr>
 						<td><%= order.user %></td>
@@ -28,6 +33,11 @@
 						<td>
 							<%= number_to_currency(order.total_amount_due) %>
 						</td>
+						<td>
+							<%= hidden_field_tag "orders[#{order.id}][paid]", '' %>
+							<%= check_box_tag "orders[#{order.id}][paid]", true, order.paid %>
+							<%#= hidden_field_tag 'orders[][id]', order.id %>
+						</td>
 					</tr>
 				<% end %>
 		<tr>
@@ -40,9 +50,12 @@
 			<td>
 				<strong><%= number_to_currency(@trip.total_amount_due) %></strong>
 			</td>
+			<td><%= submit_tag 'Save as paid'%></td>
 		</tr>
 	</table>
+	
 </p>
+</form>
 <p>
 	<%= link_to 'Publicize trip via email', email_publicize_path(@trip.id) %>
 </p>

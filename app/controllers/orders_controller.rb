@@ -91,6 +91,14 @@ class OrdersController < ApplicationController
       end
     end
   end
+  
+  def update_multiple
+    params[:orders].each do |order_id, paid_hash|
+      order = Order.find(order_id)
+      order.update_attributes(paid_hash)
+      end
+    redirect_to url_for(controller: :trips, action: :show, id: params[:trip_id])
+  end
 
   # DELETE /orders/1
   # DELETE /orders/1.json
