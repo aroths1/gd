@@ -5,6 +5,14 @@ class Trip < ActiveRecord::Base
   has_many :orders, dependent: :destroy
   has_many :contacts, dependent: :destroy
   attr_accessible :date, :leader, :group, :destination_specific_activity, :payment_instructions
+  validates :date, :leader, :group_id, :destination_specific_activity_id, presence: true
+  validate :date_cannot_be_in_past
+  
+  def date_cannot_be_in_past
+    if self.date < Date.today
+      errors.add(:date, "cannot be in the past")
+    end
+  end
   
   def to_s
     self.destination_specific_activity.activity.to_s.capitalize + ' with ' + self.group.to_s + ' on ' + self.date.to_s

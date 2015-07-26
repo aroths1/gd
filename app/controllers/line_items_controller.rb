@@ -70,6 +70,7 @@ class LineItemsController < ApplicationController
           #do nothing if quantity not changed
         else #quantity changed to something other than 0
           existing_line_item.update_attributes(li)
+          
           order_changed = true
         end
       elsif line_item.id.nil? && ! line_item.quantity.nil? #line item does not already exist, so need to create a new one

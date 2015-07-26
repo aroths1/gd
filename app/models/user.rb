@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   ROLES = %w[admin user]
   belongs_to :person
+  has_many :orders, inverse_of: :user
+  has_many :trips, inverse_of: :leader
+  validates :mobile_phone, presence: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

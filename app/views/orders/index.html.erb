@@ -1,16 +1,17 @@
-<h1>Trips you've registered for</h1>
+<h1>Your registered-for trips</h1>
 
 <table>
   <tr>
     <th>Trip</th>
-    <th>User</th>
+    <th>Total</th>
     <th>Paid</th>
   </tr>
 
 <% @orders.each do |order| %>
-  <tr>    <td><%= order.trip %></td>
-    <td><%= order.user %></td>
-    <td><%= order.paid %></td>
+  <tr>    
+  	<td><%= order.trip %></td>
+    <td><%= number_to_currency(order.total_amount_due) %></td>
+    <td><%= order.paid ? 'yes':'no' %></td>
     <td><%= link_to 'Show', order %></td>
     <td><%= link_to 'Edit', edit_order_path(order) %></td>
     <td><%#= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>

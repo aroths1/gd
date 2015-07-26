@@ -5,7 +5,7 @@ class TripsController < ApplicationController
   load_and_authorize_resource except: :public_show #cancancan
   skip_authorization_check :only => [:public_show]
   def index
-    @trips = Trip.all
+    @trips = Trip.where "date >= ?", Date.current
 
     respond_to do |format|
       format.html # index.html.erb

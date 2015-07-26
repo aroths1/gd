@@ -1,10 +1,11 @@
 class Order < ActiveRecord::Base
-  has_many :line_items, :dependent => :destroy
+  has_many :line_items, :dependent => :destroy #, inverse_of: :order
   belongs_to :user
   belongs_to :trip
   
   attr_accessible :paid, :user_id, :trip_id, :line_items, :line_items_attributes
   accepts_nested_attributes_for :line_items
+  validates :user_id, :trip_id, presence: true
   
   def total_amount_due
     sum = 0
