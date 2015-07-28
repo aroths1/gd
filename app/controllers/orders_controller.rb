@@ -70,6 +70,10 @@ class OrdersController < ApplicationController
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render json: @order, status: :created, location: @order }
       else
+        #@order = Order.new(params[:order])
+        @trip = @order.trip
+        @items = Item.find_all_by_destination_specific_activity_id(@trip.destination_specific_activity.id)
+        #@order.line_items.build
         format.html { render action: "new" }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end

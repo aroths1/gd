@@ -2,8 +2,8 @@ class LineItem < ActiveRecord::Base
   belongs_to :item
   belongs_to :order
   attr_accessible :quantity, :item_id
-  validates :quantity, :item_id, :order_id, presence: true
-  validates :quantity, numericality: {only_integer: true, greater_than: 0}
+  validates :quantity, :item_id, presence: true
+  validates :quantity, numericality: {only_integer: true, greater_than: -1, message: "cannot be negative"}
   
   def extended_price
     quantity * item.price

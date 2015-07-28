@@ -1,15 +1,17 @@
 <%= form_tag '/line_items', method: :put %>
-  <% if @order.errors.any? %>
+<% if ! @errors.nil? && @errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
-
       <ul>
-      <% @order.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <% @errors.each do |error| %>
+	      <% error.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
       <% end %>
+      
       </ul>
     </div>
-  <% end %>
+<% end %>
+  
 
   	<%= hidden_field_tag :order_id, @order.id %>	
 	<% @line_items.each do |line_item| %>

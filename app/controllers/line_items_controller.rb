@@ -58,31 +58,70 @@ class LineItemsController < ApplicationController
   # PUT /line_items/1.json
   def update
     order_changed = false
-    @line_items = params[:line_items]
-    @line_items.each do |li|
+    @errors = Array.new #holds error objects
+    @line_items = Array.new #holds existing_line items in case of errors
+    line_items = params[:line_items]
+    #Loop through @line_items first to validate but NOT to persist. If any is invalid, then render the order edit
+    #view to display @errors without saving. Otherwise save them and redirect to order show page.
+    
+    line_items.each do |li|
       line_item = LineItem.new(li)
       if ! li[:id].empty? #has value for id
         existing_line_item = LineItem.find(li[:id]) #line item already exists
         if line_item.quantity == 0 || line_item.quantity.nil? #quantity changed to 0
-          existing_line_item.destroy
-          order_changed = true
+          #existing_line_item.destroy
+          #order_changed = true
+          @line_items << existing_line_item
         elsif existing_line_item.quantity == line_item.quantity #quantity not changed
           #do nothing if quantity not changed
+          @line_items << existing_line_item
         else #quantity changed to something other than 0
-          existing_line_item.update_attributes(li)
-          
+          #existing_line_item.update_attributes(li)
+          @errors << line_item.errors if line_item.invalid?
+          @line_items << existing_line_item
+          #order_changed = true
+        end
+      elsif line_item.quantity != 0 && line_item.id.nil? && ! line_item.quantity.nil? #line item does not already exist, so need to create a new one
+        #@line_item = line_item
+        line_item.order_id = params[:order_id]
+        #@line_item.save
+        #order_changed = true
+        @errors << line_item.errors if line_item.invalid?
+        @line_items << line_item
+      else
+        @line_items << line_item
+      end
+    end #each to validate
+    if ! @errors.empty?
+      @order = Order.find(params[:order_id])
+      render "orders/edit"
+    else
+      line_items.each do |li|
+        line_item = LineItem.new(li)
+        if ! li[:id].empty? #has value for id
+          existing_line_item = LineItem.find(li[:id]) #line item already exists
+          if line_item.quantity == 0 || line_item.quantity.nil? #quantity changed to 0
+            existing_line_item.destroy
+            order_changed = true
+          elsif existing_line_item.quantity == line_item.quantity #quantity not changed
+            #do nothing if quantity not changed
+          else #quantity changed to something other than 0
+            existing_line_item.update_attributes(li)
+            
+            order_changed = true
+          end
+        elsif line_item.quantity != 0 && line_item.id.nil? && ! line_item.quantity.nil? #line item does not already exist, so need to create a new one
+          line_item = line_item
+          line_item.order_id = params[:order_id]
+          line_item.save
           order_changed = true
         end
-      elsif line_item.id.nil? && ! line_item.quantity.nil? #line item does not already exist, so need to create a new one
-        @line_item = line_item
-        @line_item.order_id = params[:order_id]
-        @line_item.save
-        order_changed = true
-      end
-    end #each
+      end #each to save
+    
     UserMailer.send_invoice(current_user, Order.find(params[:order_id]), true).deliver if order_changed
-    redirect_to Order.find(params[:order_id]), notice: 'Order was succesfully updated.'
- 
+    notice = order_changed ? 'Order was successfully updated' : 'Order was not changed'
+    redirect_to Order.find(params[:order_id]), notice: notice
+    end
   end #update
 
   # DELETE /line_items/1
